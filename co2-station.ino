@@ -16,6 +16,7 @@
 #define THINGERIO_USERNAME ""
 #define THINGERIO_DEVICE_ID ""
 #define THINGERIO_DEVICE_CREDENTIAL ""
+#define THINGERIO_ENDPOINT ""
 ThingerESP8266 thing(THINGERIO_USERNAME, THINGERIO_DEVICE_ID, THINGERIO_DEVICE_CREDENTIAL);
 
 // BME280
@@ -138,7 +139,7 @@ void loop() {
       if(!alarmUp && co2 >= CO2THRESHOLD_ALARM) {
         pson data;
         data["co2"] = co2;
-        thing.call_endpoint("weatherstation", data);
+        thing.call_endpoint(THINGERIO_ENDPOINT, data);
         alarmUp = true;
       }
       else if (alarmUp && co2 < CO2THRESHOLD_ALARM_HYST) {
